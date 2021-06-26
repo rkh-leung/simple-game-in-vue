@@ -1,1 +1,1 @@
-# simple-game-in-vue
+# Simple browser game in Vue3
