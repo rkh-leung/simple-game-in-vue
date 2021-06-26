@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Based Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      Basic text based game
+    </header>
+    <div id="game">
+      <section id="player" class="container">
+        <h2>Player</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerCurrentHealth"></div>
+        </div>
+      </section>
+
+      <section id="monster" class="container">
+        <h2>Monster</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterCurrentHealth"></div>
+        </div>
+      </section>
+
+      <section id="surrender" class="container" v-if="confirm">
+        <h1>Are you sure you want to give up?</h1>
+        <button @click="surrender">Yes</button>
+        <button @click="confirmation">No</button>
+      </section>
+
+      <section class="container" v-if="winner">
+        <h2>Game Over!</h2>
+        <h3 v-if="winner === 'monster'">You lost!</h3>
+        <h3 v-else-if="winner === 'player'">You won!</h3>
+        <h3 v-else>It's a draw.</h3>
+        <button @click="startGame">Start a new game!</button>
+      </section>
+
+      <section id="controls" v-if="!winner">
+        <button @click="attackMonster">ATTACK</button>
+        <button
+          :disabled="specialAttackRestriction"
+          @click="attackMonsterSpecial"
+        >
+          SPECIAL ATTACK
+          <span>Cooldown: {{specialCooldownCounter}} turns</span>
+        </button>
+        <span></span>
+        <button :disabled="healRestriction" @click="healPlayer">
+          HEAL <span>Cooldown: {{healCooldownCounter}} turns</span>
+        </button>
+        <button @click="confirmation">SURRENDER</button>
+      </section>
+
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for="logMessage in logMessages">
+            <span
+              >{{ logMessage.actionBy === "player" ? "Player" :
+              "Monster"}}</span
+            >
+            <span v-if="logMessage.actionType === 'heal'">
+              heals for
+              <span class="log-heal">{{logMessage.actionValue}}</span>
+              points</span
+            >
+            <span v-if="logMessage.actionType === 'normal-attack'">
+              deals
+              <span class="log-damage"> {{logMessage.actionValue}}</span>
+              damage</span
+            >
+            <span v-if="logMessage.actionType === 'special-attack'">
+              charges up and deals
+              <span class="log-damage"> {{logMessage.actionValue}}</span>
+              damage</span
+            >
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
