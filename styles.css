@@ -1,11 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
 #game {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -14,6 +6,7 @@ body {
     'player log'
     'monster log'
     'surrender log'
+    'game-over log'
     'controls log';
 }
 
@@ -27,10 +20,33 @@ body {
 
 #log {
   grid-area: log;
+  height: 700px;
+  overflow: scroll;
 }
 
 #surrender {
   grid-area: surrender;
+}
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  grid-area: controls;
+}
+
+#game-over {
+  grid-area: game-over;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
 }
 
 header {
@@ -43,6 +59,43 @@ header {
   font-size: 50px;
   font-weight: bold;
   grid-area: header;
+}
+
+section {
+  width: 90%;
+  max-width: 40rem;
+  margin: auto;
+}
+
+button {
+  font: inherit;
+  border: 1px solid #88005b;
+  background-color: #88005b;
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 1rem;
+  width: 12rem;
+  height: 5rem;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+button:hover {
+  background-color: blue;
+}
+
+button:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  box-shadow: none;
+  color: #3f3f3f;
+  cursor: not-allowed;
+}
+
+ul {
+  list-style-type: none;
+  font-size: 1.5rem;
 }
 
 .container {
@@ -67,51 +120,10 @@ header {
   height: 100%;
 }
 
-section {
-  width: 90%;
-  max-width: 40rem;
-  margin: auto;
-}
-
-#controls {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  grid-area: controls;
-}
-
-button {
-  font: inherit;
-  border: 1px solid #88005b;
-  background-color: #88005b;
-  color: white;
-  padding: 1rem;
-  border-radius: 12px;
-  margin: 1rem;
-  width: 12rem;
-  height: 5rem;
-  cursor: pointer;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
-}
-
-button:disabled {
-  background-color: #ccc;
-  border-color: #ccc;
-  box-shadow: none;
-  color: #3f3f3f;
-  cursor: not-allowed;
-}
-
 .log-heal {
   color: green;
 }
 
 .log-damage {
   color: red;
-}
-
-ul {
-  list-style-type: none;
 }

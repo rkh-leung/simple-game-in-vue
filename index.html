@@ -33,7 +33,7 @@
         <button @click="confirmation">No</button>
       </section>
 
-      <section class="container" v-if="winner">
+      <section id="game-over" class="container" v-if="winner">
         <h2>Game Over!</h2>
         <h3 v-if="winner === 'monster'">You lost!</h3>
         <h3 v-else-if="winner === 'player'">You won!</h3>
@@ -41,7 +41,7 @@
         <button @click="startGame">Start a new game!</button>
       </section>
 
-      <section id="controls" v-if="!winner">
+      <section id="controls" v-if="!winner && !confirm">
         <button @click="attackMonster">ATTACK</button>
         <button
           :disabled="specialAttackRestriction"
