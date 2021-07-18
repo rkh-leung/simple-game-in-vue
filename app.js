@@ -41,6 +41,26 @@ const app = Vue.createApp({
       if (value != 0) {
         return value--
       }
+    },
+    specialCooldownCounter (value) {
+      if (value == 0) return (this.specialCooldownCounter = 4)
+    },
+    healCooldownCounter (value) {
+      if (value == 0) return (this.healCooldownCounter = 3)
+    },
+    playerHealth (value) {
+      if (value <= 0 && this.monsterHealth <= 0) {
+        this.winner = 'draw'
+      } else if (value <= 0) {
+        this.winner = 'monster'
+      }
+    },
+    monsterHealth (value) {
+      if (value <= 0 && this.playerHealth <= 0) {
+        this.winner = 'draw'
+      } else if (value <= 0) {
+        this.winner = 'player'
+      }
     }
   },
   computed: {
@@ -71,28 +91,6 @@ const app = Vue.createApp({
         this.healCooldown,
         this.currentRound
       )
-    }
-  },
-  watch: {
-    specialCooldownCounter (value) {
-      if (value == 0) return (this.specialCooldownCounter = 4)
-    },
-    healCooldownCounter (value) {
-      if (value == 0) return (this.healCooldownCounter = 3)
-    },
-    playerHealth (value) {
-      if (value <= 0 && this.monsterHealth <= 0) {
-        this.winner = 'draw'
-      } else if (value <= 0) {
-        this.winner = 'monster'
-      }
-    },
-    monsterHealth (value) {
-      if (value <= 0 && this.playerHealth <= 0) {
-        this.winner = 'draw'
-      } else if (value <= 0) {
-        this.winner = 'player'
-      }
     }
   },
   methods: {
